@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: my-personal-ai-assistant
+
+  # 关闭 pgvector 自动配置，改用 AiConfig 里手动定义的 vectorStore Bean（维度 768 需显式指定）
+  autoconfigure:
+    exclude:
+      - org.springframework.ai.vectorstore.pgvector.autoconfigure.PgVectorStoreAutoConfiguration
+
+  # PostgreSQL + pgvector 数据源（用环境变量覆盖，方便不同环境）
+  datasource:
+    url: ${PG_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${PG_USER:postgres}
+    password: ${PG_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  ai:
+    ollama:
+      base-url: http://localhost:11434     # Ollama 默认地址
+      chat:
+        options:
+          model: deepseek-r1:7b              # 聊天模型，和你 ollama pull 的一致
+      embedding:
+        options:
+          model: nomic-embed-text         # 向量化模型
+
+# 应用自定义配置
+app:
+  similarity-threshold: 0.4     # 相似度阈值：低于该值的简历片段不参与回答（调这个值不用改代码）
