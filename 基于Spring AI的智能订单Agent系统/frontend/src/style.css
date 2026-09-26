@@ -1,0 +1,15 @@
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: system-ui, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    /* 浅色渐变背景 */
+    background: linear-gradient(160deg, #eef2f9, #e3e9f5);
+  }
+
+  #app {
+    height: 100vh;
+  }
